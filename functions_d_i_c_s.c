@@ -6,24 +6,24 @@
 /*   By: vsimeono <vsimeono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 17:33:57 by vsimeono          #+#    #+#             */
-/*   Updated: 2021/11/25 20:39:38 by vsimeono         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:34:57 by vsimeono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		for_integer(va_list list)
+int	for_integer(va_list list)
 {
-	long		number;
-	unsigned int	len;
-	
+	long			number;
+	unsigned int	len_int;
+
 	number = va_arg(list, int);
-	len = get_len_int(number);
+	len_int = get_len_int(number);
 	ft_putnbr_fd(number, 1);
-	return(len);
+	return (len_int);
 }
 
-int		for_char(va_list list)
+int	for_char(va_list list)
 {
 	int		len_char;
 	char	character;
@@ -31,29 +31,40 @@ int		for_char(va_list list)
 	len_char = 1;
 	character = va_arg(list, int);
 	ft_putchar_fd(character, 1);
-	return(len_char);
+	return (len_char);
 }
 
-int		for_string(va_list list)
+int	for_string(va_list list)
 {
-	int		len_string;
+	int			len_string;
 	char		*string;
-	
+
 	string = va_arg(list, char *);
+	if (string == NULL)
+	{
+		write(1, "(null)", 6);
+		len_string = 6;
+		return (len_string);
+	}
 	len_string = ft_strlen(string);
 	write(1, string, len_string);
-	return(len_string);
+	return (len_string);
 }
 
-int		get_len_int(int number)
+int	get_len_int(long int number)
 {
-	int		i;
-	
-	i = 1;
-	while(number > 9)
+	int		len;
+
+	len = 1;
+	if (number < 0)
+	{
+		number = number * -1;
+		len++;
+	}
+	while (number / 10)
 	{
 		number = number / 10;
-		i++;
+		len++;
 	}
-	return(i);
+	return (len);
 }

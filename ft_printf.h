@@ -6,28 +6,28 @@
 /*   By: vsimeono <vsimeono@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:25:14 by vsimeono          #+#    #+#             */
-/*   Updated: 2021/11/25 20:45:08 by vsimeono         ###   ########.fr       */
+/*   Updated: 2021/11/27 22:04:47 by vsimeono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-#define PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-#include <unistd.h>
-#include <stdarg.h>
+# include <unistd.h>
+# include <stdarg.h>
 
-int ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 int		check_placeholder(va_list list, char c);
 int		for_integer(va_list list);
-int		get_len_int(int number);
+int		get_len_int(long int number);
 int		for_char(va_list list);
 int		for_string(va_list list);
 int		for_hexadecimal_lower(va_list list);
 int		for_hexadecimal_upper(va_list list);
-int		ft_put_hexa(int number, int base_type, char *base);
-int		get_len_hexa(int number);
+void	ft_put_hexa(unsigned long number, int base_type, char *base);
+int		get_len_hexa(unsigned long number);
 int		for_pointer(va_list list);
-int		for_percent(va_list list);
+int		for_percent(void);
 int		for_unsigned(va_list list);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
